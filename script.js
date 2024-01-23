@@ -1,33 +1,99 @@
-document.addEventListener("DOMContentLoaded", function () {
-    calcularTotal()
-});
-
-function removerItem() {
-
-    const botaoRemover = document.getElementsByClassName('remover');
-    console.log(botaoRemover);
-
-    for (var i = 0; i < botaoRemover.length; i++) {
-        botaoRemover[i].addEventListener("click", function (event) {
-            event.target.parentElement.parentElement.remove()
-            calcularTotal()
-        });
-    }
+if (document.readyState == "loading") {
+    document.addEventListener("DOMContentLoaded", ready)
+} else {
+    ready()
 }
 
-function adicionarRemoverItens(acao, linha) {
-    let quantidadeItensElement = parseInt(linha.querySelector('.quantidade-itens').innerHTML);
-    if (acao === "adicionar") {
-        quantidadeItensElement++;
-    } else if (acao === "remover" && quantidadeItensElement > 0) {
-        quantidadeItensElement--
+function ready() {
+    let RemoverProduto = document.getElementsByClassName("btn-remover");
+    for (var i = 0; i < RemoverProduto.length; i++) {
+        RemoverProduto[i].addEventListener("click", removerItem);
     }
-    linha.querySelector('.quantidade-itens').innerHTML = quantidadeItensElement;
-    calcularTotal()
+
+    let addRemoverItens = document.getElementsByClassName("botaoMM");
+    for (var i = 0; i < addRemoverItens.length; i++) {
+        addRemoverItens[i].addEventListener("click", CliqueBotaoMM);
+    }
+
+    let addCarrinho = document.getElementsByClassName("comprar-btn")
+    for (var i = 0; i < addCarrinho.length; i++) {
+        addCarrinho[i].addEventListener("click", adicionarCarrinho)
+    }
+
+}   
+
+function CliqueBotaoMM(event) {
+    let acao = event.target;
+    let acaoPai = acao.parentElement.parentElement;
+    let quantidade = parseInt(acaoPai.querySelector(".quantidade-itens").innerHTML);
+
+    if (acao.classList.contains("bx-minus") && quantidade > 0) {
+        quantidade--;
+    } else if (acao.classList.contains("bx-plus")) {
+        quantidade++;
+    }
+
+    acaoPai.querySelector(".quantidade-itens").innerHTML = quantidade
+
+    if (quantidade === 0) {
+        acaoPai.parentElement.parentElement.remove()
+    }
+
+    calcularTotal();
 }
 
-function adicionarProduto() {
-    console.log(document.querySelector('.produto').innerHTML)
+
+function removerItem(event) {
+    event.target.parentElement.parentElement.remove();
+    calcularTotal();
+}
+
+
+function adicionarCarrinho(event) {
+    let produto = event.target.parentElement
+    let imgProduto = produto.querySelector(".imagem-produto").src
+    let nomeProduto = produto.querySelector(".nome-produto").innerHTML
+    let precoProduto = produto.querySelector(".preco").innerHTML
+
+    let nomeProdutosCarrinho = document.getElementsByClassName("nome")
+    for (var i=0; i<nomeProdutosCarrinho.length;i++){
+        if (nomeProdutosCarrinho[i].innerHTML == nomeProduto){
+        let quantidade = parseInt(nomeProdutosCarrinho[i].parentElement.parentElement.parentElement.querySelector(".quantidade-itens").innerHTML)
+        nomeProdutosCarrinho[i].parentElement.parentElement.parentElement.querySelector(".quantidade-itens").innerHTML = quantidade +1
+            return
+        }
+    }
+
+    let novoElement = document.createElement("tr")
+    novoElement.classList.add("produto-carrinho")
+    novoElement.innerHTML = 
+    `
+                    <td class="produto-identificao">
+                        <img src="${imgProduto}" alt="${nomeProduto}">
+                        <div class="info-carrinho">
+                            <div class="nome">${nomeProduto}</div>
+                         <!--   <div class="tipo">M</div>-->
+                        </div>
+                    </td>
+                    <td class="preco-produto">${precoProduto}</td>
+                    <td>
+                        <div class="qty">
+                            <button class="botaoMM" type="button"><i class='bx bx-minus'></i></button>
+                            <span class="quantidade-itens">1</span>
+                            <button class="botaoMM" type="button"><i class='bx bx-plus'></i></button>
+                        </div>
+                    </td>
+                    <td class="remover">
+                        <button type="button" class="btn-remover">REMOVER</button>
+                    </td>
+    `
+    
+    let tabela = document.querySelector("#carrinho tbody")
+    tabela.append(novoElement)
+    calcularTotal()
+    novoElement.querySelector(".btn-remover").addEventListener("click", removerItem)
+    novoElement.querySelector(".qty").addEventListener("click", CliqueBotaoMM)
+
 }
 
 function calcularTotal() {
