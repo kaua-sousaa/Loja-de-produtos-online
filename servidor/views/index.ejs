@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="script.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <header id="nome-principal">
+        <a href="/">LOJA OFICIAL</a>
+    </header>
+    <div id="navegacao">
+        <div>
+            <h3>LOGO</h3>
+        </div>
+        <div class="janelas">
+            <a href="#">Loja</a>
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+        </div>
+        <div class="login">
+            <% if (user) { %>
+                <span>Olá, <%= user %></span>  
+            <% }else {%>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"/></svg>
+            </a>
+            <span>Faça login</br> ou cadastre-se</span>
+            <div class="dropdown">
+                <button type="button" onclick="location.href='/login'">Login</button>
+                <button type="button" onclick="location.href='/registrar'">Cadastrar</button>
+            </div>
+            <% } %>
+        </div>
+    </div>
+    <div id="box">
+        <div class="produto">
+            <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
+            <div class="info">
+                <p class="nome-produto">pratas gb</p>
+                <p class="preco">R$ 79,99</p>
+            </div>
+            <button class="comprar-btn">COMPRAR</button>
+        </div>
+        <div class="produto">
+            <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
+            <div class="info">
+                <p class="nome-produto">pratas lucas</p>
+                <p class="preco">R$ 89,99</p>
+            </div>
+            <button class="comprar-btn">COMPRAR</button>
+        </div>
+        <div class="produto">
+            <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
+            <div class="info">
+                <p class="nome-produto">pratas melo</p>
+                <p class="preco">R$ 79,99</p>
+            </div>
+            <button class="comprar-btn">COMPRAR</button>
+        </div>
+        <div class="produto">
+            <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
+            <div class="info">
+                <p class="nome-produto">pratas eminem</p>
+                <p class="preco">R$ 89,99</p>
+            </div>
+            <button class="comprar-btn">COMPRAR</button>
+        </div>
+    </div>
+    <h1 style="text-align: center; margin: 20px 0px;"> CARRINHO</h1>
+    <div id="carrinho">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td id="total">0,00</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div id="finalizar-compra">
+        <button type="button"> FINALIZAR COMPRAR</button>
+    </div>
+
+</body>
+
+</html>

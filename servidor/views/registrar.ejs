@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+    <title>Login e Registro</title>
+</head>
+
+<body>
+    <header id="nome-principal">
+        <a href="/">LOJA OFICIAL</a>
+    </header>
+    <div id="container">
+        <div id="registrarforms" class="forms-container">
+            <h2>Registrar-se</h2>
+            <form action="/registrar" method="post">
+                <div class="forms-grupo">
+                    <label for="registrar-email">Email:</label>
+                    <input type="email" name="email" placeholder="Digite seu email" value="kaua@gmail.com" required>
+                </div>
+                <div class="forms-grupo">
+                    <label for="registrar-password">Senha:</label>
+                    <input type="password" name="senha" placeholder="Digite sua senha" value="kaua123" required>
+                </div>
+                <div class="forms-grupo">
+                    <label for="phone-input">Nome:</label>
+                    <input type="text" name="nome" placeholder="Digite seu nome" value="kaua">
+                </div>
+
+                <!--     <div class="forms-grupo">
+                    <label for="registrar-cpf">CPF:</label>
+                    <input type="text" id="registrar-cpf" placeholder="Digite seu CPF" required>
+                </div>
+                <div class="forms-grupo">
+                    <label for="nascimento">Data de Nascimento:</label>
+                    <input type="date" id="nascimento" required>
+                </div>-->
+                <div class="login-btn">
+                    <button type="submit">Registrar</button>
+                </div>
+            </form>
+            <p>Já tem uma conta? <a href="/login">Entrar</a></p>
+
+
+
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+
+</html>

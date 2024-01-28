@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Nunito&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+header {
+    background-color: black;
+    text-align: center;
+    padding: 15px;
+    font-weight: bolder;
+    font-size: 25px;
+
+}
+
+#nome-principal>a {
+    text-decoration: none;
+    color: white;
+}
+
+#navegacao {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    padding: 20px;
+
+
+    .janelas {
+        a {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+            font-weight: bolder;
+            padding: 10px;
+        }
+
+        a:hover {
+            color: white;
+        }
+    }
+
+    .login{
+        display:flex;
+        align-items: center;
+        font-weight: bolder;
+
+    }
+    .login a{
+        border-radius: 100%;
+        border:1px solid black;
+        padding: 5px;
+        margin-right: 10px;
+    }
+    .dropdown{
+        position: absolute;
+        display:none;
+        background-color: #ffffff;
+        margin-top:180px;
+        border-radius: 5px;
+        padding: 20px 10px;
+        box-shadow: 0px 8px 16px 0px;
+    }
+    .dropdown button{
+        border: 1px solid black;
+        background-color: white;
+        width: 100%;
+        border-radius: 5px;
+        padding: 6px;
+        margin-top:5px;
+        cursor: pointer;   
+        transition: background-color 0.3s ease;
+    }
+    .dropdown button:hover{
+        background-color: #e7e7e7;
+    }
+    .login:hover .dropdown, .dropdown:hover{
+        display:block;
+    }
+
+    .login::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 80px;
+    }
+}
+
+
+#box {
+    display: flex;
+    justify-content: space-around;
+}
+
+.produto {
+    padding: 20px;
+    background-color: #cccccc6d;
+    border-radius: 3px;
+
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    .info {
+        margin-top: 10px;
+    }
+
+    .nome-produto {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .preco {
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .comprar-btn {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        letter-spacing: 1px;
+        border-radius: 5px;
+        width: 100%;
+        height: 40px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .comprar-btn:hover {
+        background-color: #45a049;
+    }
+}
+
+
+
+//TELA DE LOGIN
+
+
+
+#container {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.forms-container {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 300px;
+}
+
+.forms-container h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.forms-grupo {
+    margin-bottom: 20px;
+}
+
+.forms-grupo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.forms-grupo input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-btn {
+    margin-top: 20px;
+}
+
+.login-btn button {
+    margin-right: 10px;
+    height: 30px;
+    width: 100%;
+    cursor: pointer;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.login-btn button:hover {
+    background-color: #4b545b;
+}
+
+#register-forms {
+    width: 500px;
+}
+
+// carrinhooooooooooooooooooooooooooooooooooo
+#carrinho {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 65%;
+
+    thead {
+        text-align: left;
+        border-bottom: 1px solid black;
+
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid black;
+        }
+    }
+}
+
+.produto-identificao {
+    display: flex;
+
+    align-items: center;
+    padding: 15px 0;
+
+    img {
+        padding-left: 5px;
+        border-radius: 8px;
+    }
+
+    .info-carrinho {
+        padding-left: 5px;
+
+        .nome {
+            font-weight: bolder;
+        }
+    }
+}
+
+.qty {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 15px;
+
+
+    button {
+        background-color: #ccc;
+        margin: 0 10px;
+        border: none;
+        padding: 3px 6px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+}
+
+.remover {
+    button {
+        border: none;
+        background-color: rgb(151, 140, 140);
+        color: white;
+        padding: 7px;
+        border-radius: 5px;
+        cursor: pointer;
+
+    }
+}
+
+
+
+#finalizar-compra {
+    display: flex;
+    justify-content: center;
+    margin-top:20px;
+    button {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        letter-spacing: 1px;
+        border-radius: 5px;
+        height: 40px;
+        padding:5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+}
