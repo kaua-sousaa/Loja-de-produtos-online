@@ -25,51 +25,63 @@
         </div>
         <div class="login">
             <% if (user) { %>
-                <span>Olá, <%= user %></span>  
-            <% }else {%>
-            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z"/></svg>
-            </a>
-            <span>Faça login</br> ou cadastre-se</span>
-            <div class="dropdown">
-                <button type="button" onclick="location.href='/login'">Login</button>
-                <button type="button" onclick="location.href='/registrar'">Cadastrar</button>
-            </div>
-            <% } %>
+                <span>Olá, <%= user %></span>
+                <% }else {%>
+                    <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z" />
+                        </svg>
+                    </a>
+                    <span>Faça login</br> ou cadastre-se</span>
+                    <div class="dropdown">
+                        <button type="button" onclick="location.href='/login'">Login</button>
+                        <button type="button" onclick="location.href='/registrar'">Cadastrar</button>
+                    </div>
+                    <% } %>
         </div>
     </div>
     <div id="box">
-        <div class="produto">
-            <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
-            <div class="info">
-                <p class="nome-produto">pratas gb</p>
-                <p class="preco">R$ 79,99</p>
+        <a href="/paginaProduto">
+            <div class="produto">
+                <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
+                <div class="info">
+                    <p class="nome-produto">pratas gb</p>
+                    <p class="preco">R$ 79,99</p>
+                </div>
+                <button class="comprar-btn">COMPRAR</button>
             </div>
-            <button class="comprar-btn">COMPRAR</button>
-        </div>
-        <div class="produto">
-            <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
-            <div class="info">
-                <p class="nome-produto">pratas lucas</p>
-                <p class="preco">R$ 89,99</p>
+
+        </a>
+        <a href="/paginaProduto">
+            <div class="produto">
+                <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
+                <div class="info">
+                    <p class="nome-produto">pratas lucas</p>
+                    <p class="preco">R$ 89,99</p>
+                </div>
+                <button class="comprar-btn">COMPRAR</button>
             </div>
-            <button class="comprar-btn">COMPRAR</button>
-        </div>
-        <div class="produto">
-            <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
-            <div class="info">
-                <p class="nome-produto">pratas melo</p>
-                <p class="preco">R$ 79,99</p>
+        </a>
+        <a href="/paginaProduto">
+            <div class="produto">
+                <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
+                <div class="info">
+                    <p class="nome-produto">pratas melo</p>
+                    <p class="preco">R$ 79,99</p>
+                </div>
+                <button class="comprar-btn">COMPRAR</button>
             </div>
-            <button class="comprar-btn">COMPRAR</button>
-        </div>
-        <div class="produto">
-            <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
-            <div class="info">
-                <p class="nome-produto">pratas eminem</p>
-                <p class="preco">R$ 89,99</p>
+        </a>
+        <a href="/paginaProduto">
+            <div class="produto">
+                <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
+                <div class="info">
+                    <p class="nome-produto">pratas eminem</p>
+                    <p class="preco">R$ 89,99</p>
+                </div>
+                <button class="comprar-btn">COMPRAR</button>
             </div>
-            <button class="comprar-btn">COMPRAR</button>
-        </div>
+        </a>
     </div>
     <h1 style="text-align: center; margin: 20px 0px;"> CARRINHO</h1>
     <div id="carrinho">

@@ -116,6 +116,9 @@ router.post('/registrar', function(req, res){
 
 })
 
+router.get('/paginaProduto', function(req, res){
+    res.render('paginaProduto.ejs')
+})
 
 
 
