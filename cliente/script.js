@@ -16,13 +16,19 @@ function ready() {
         addRemoverItens[i].addEventListener("click", CliqueBotaoMM);
     }
 
-    let addCarrinho = document.getElementsByClassName("comprar-btn")
+   /* let addCarrinho = document.getElementsByClassName("comprar-btn")
+    for (var i = 0; i < addCarrinho.length; i++) {
+        addCarrinho[i].addEventListener("click", adicionarCarrinho)
+    }*/
+    let addCarrinho = document.getElementsByClassName("comprar-pag-produto")
     for (var i = 0; i < addCarrinho.length; i++) {
         addCarrinho[i].addEventListener("click", adicionarCarrinho)
     }
 
     let btnComprar = document.getElementById("finalizar-compra")
     btnComprar.addEventListener("click", realizarCompra)
+    
+    
 
 }   
 
@@ -68,7 +74,60 @@ function removerItem(event) {
     calcularTotal();
 }
 
+function adicionarCarrinho(event) {
+    let produto = event.target.parentElement.parentElement.parentElement
+    console.log(produto)
+    let imgProduto = produto.querySelector(".img-pag-produto").src
+    let nomeProduto = produto.querySelector(".titulo-pag-produto").innerHTML
+    let precoProduto = produto.querySelector(".precos-pag-produto").innerHTML
 
+    console.log(imgProduto, nomeProduto, precoProduto)
+
+    let nomeProdutosCarrinho = document.getElementsByClassName("nome")
+    for (var i=0; i<nomeProdutosCarrinho.length;i++){
+        if (nomeProdutosCarrinho[i].innerHTML == nomeProduto){
+        let quantidade = parseInt(nomeProdutosCarrinho[i].parentElement.parentElement.parentElement.querySelector(".quantidade-itens").innerHTML)
+        nomeProdutosCarrinho[i].parentElement.parentElement.parentElement.querySelector(".quantidade-itens").innerHTML = quantidade +1
+        calcularTotal()
+            return
+        }
+    }
+
+    let novoElement = document.createElement("tr")
+    novoElement.classList.add("produto-carrinho")
+    novoElement.innerHTML = 
+    `
+                    <td class="produto-identificao">
+                        <img src="${imgProduto}" alt="${nomeProduto}">
+                        <div class="info-carrinho">
+                            <div class="nome">${nomeProduto}</div>
+                         <!--   <div class="tipo">M</div>-->
+                        </div>
+                    </td>
+                    <td class="preco-produto">${precoProduto}</td>
+                    <td>
+                        <div class="qty">
+                            <button class="botaoMM" type="button"><i class='bx bx-minus'></i></button>
+                            <span class="quantidade-itens">1</span>
+                            <button class="botaoMM" type="button"><i class='bx bx-plus'></i></button>
+                        </div>
+                    </td>
+                    <td class="remover">
+                        <button type="button" class="btn-remover">REMOVER</button>
+                    </td>
+    `
+    
+    let tabela = document.querySelector("#carrinho tbody")
+    console.log(document.querySelector('#carrinho tbody'))
+    console.log(novoElement)
+    tabela.append(novoElement)
+    calcularTotal()
+    novoElement.querySelector(".btn-remover").addEventListener("click", removerItem)
+    novoElement.querySelector(".qty").addEventListener("click", CliqueBotaoMM)
+
+    
+}
+/*
 function adicionarCarrinho(event) {
     let produto = event.target.parentElement
     let imgProduto = produto.querySelector(".imagem-produto").src
@@ -115,7 +174,7 @@ function adicionarCarrinho(event) {
     novoElement.querySelector(".btn-remover").addEventListener("click", removerItem)
     novoElement.querySelector(".qty").addEventListener("click", CliqueBotaoMM)
 
-}
+}*/
 
 function calcularTotal() {
     let total = document.getElementsByClassName("produto-carrinho");
@@ -128,4 +187,16 @@ function calcularTotal() {
 
     precoTotal = precoTotal.toFixed(2)
     document.getElementById("total").innerHTML = "R$ " + precoTotal
+}
+
+
+function tamanhosBot(op){
+    let conteudo = document.getElementsByClassName('btn-tam')
+    
+    for (let i=0; i< conteudo.length;i++){    
+        
+            conteudo[i].classList.remove('selecionado')
+              
+    }
+    document.getElementById(op).classList.add('selecionado')
 }

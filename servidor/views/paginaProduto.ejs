@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="script.js"></script>
     <title>Document</title>
 </head>
 
@@ -12,27 +14,83 @@
     <header id="nome-principal">
         <a href="/">LOJA OFICIAL</a>
     </header>
-
+    <div id="navegacao">
+        <div>
+            <h3>LOGO</h3>
+        </div>
+        <div class="janelas">
+            <a href="#">Loja</a>
+            <a href="#">Sobre</a>
+            <a href="#">Contato</a>
+        </div>
+        <div class="navegacao-direita">
+            <div class="login">
+                <% if (user) { %>
+                    <span>Olá, <%= user %></span>
+                    <% }else {%>
+                        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M12 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3zm5-3a3 3 0 0 0-3 3v1h14v-1a3 3 0 0 0-3-3z" />
+                            </svg>
+                        </a>
+                        <span>Faça login</br> ou cadastre-se</span>
+                        <div class="dropdown">
+                            <button type="button" onclick="location.href='/login'">Login</button>
+                            <button type="button" onclick="location.href='/registrar'">Cadastrar</button>
+                        </div>
+                    <% } %>
+            </div>
+            <div class="cart">
+                <a href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: msFilter"><path d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921zM17.307 15h-6.64l-2.5-6h11.39l-2.25 6z"></path><circle cx="10.5" cy="19.5" r="1.5"></circle><circle cx="17.5" cy="19.5" r="1.5"></circle></svg>
+                </a>
+                <div class="dropdown-cart">
+                    <div id="carrinho">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Preço</th>
+                                    <th>Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <td id="total">0,00</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div id="finalizar-compra">
+                        <button type="button"> FINALIZAR COMPRAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="container-produto">
         <div id="produto-lado-esquerdo">
             <div>
-                <img src="<%= produtos.img %>" alt="" width="400" height="400">
+                <img class="img-pag-produto" src="<%= produtos.img %>" alt="" width="400" height="400">
             </div>
         </div>
         <div id="produto-lado-direito">
             <div>
-                <h2> <%= produtos.titulo%></h2>
+                <h2 class="titulo-pag-produto"> <%= produtos.titulo%></h2>
             </div>
             <div id="tamanhos">
                 <p>Tamanho desejado</p>
-                <button> 50cm </button>
-                <button> 60cm </button>
-                <button> 70cm </button>
+                <button id="btn1" class="btn-tam" onclick="tamanhosBot('btn1')"> 50cm </button>
+                <button id="btn2" class="btn-tam" onclick="tamanhosBot('btn2')"> 60cm </button>
+                <button id="btn3" class="btn-tam" onclick="tamanhosBot('btn3')"> 70cm </button>
             </div>
             <div id="comprar">
-                <h3>R$ <%=produtos.precos%> no Pix</h3>
-                <p> Ou 3x de R$ <%= (produtos.precos/3).toFixed(2) %></p>
-                <button type="submit">COMPRAR</button>
+                <h3>R$ <span class="precos-pag-produto"><%=produtos.precos%></span> no Pix</h3>
+                <p> Ou 3x de R$ <%= (produtos.precos/3).toFixed(2) %></p>           
+                <button type="submit" class="comprar-pag-produto">Adicionar ao Carrinho</button>
             </div>
             <div id="cep">
                 <p>Digite seu CEP</p>

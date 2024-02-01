@@ -15,7 +15,6 @@ header {
     padding: 15px;
     font-weight: bolder;
     font-size: 25px;
-
 }
 
 #nome-principal>a {
@@ -40,9 +39,13 @@ header {
             padding: 10px;
         }
 
-        a:hover {
-            color: white;
-        }
+    }
+
+    .navegacao-direita{
+        width: 300px;
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
     }
 
     .login{
@@ -79,15 +82,38 @@ header {
     .dropdown button:hover{
         background-color: #e7e7e7;
     }
-    .login:hover .dropdown, .dropdown:hover{
+    .login:hover .dropdown{
         display:block;
     }
 
     .login::after {
         content: "";
         position: absolute;
-        width: 100%;
+        width: 160px;
         height: 80px;
+    }
+
+    .cart{
+        display:flex;
+    }
+    .dropdown-cart{
+        position: absolute;
+        display:none;
+        margin-top: 50px;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: 0px 8px 16px 0px;
+        right: 0;
+        margin-right: 40px;
+    }
+    .cart:hover .dropdown-cart{
+        display:block;
+    }
+    .cart::after{
+        content: '';
+        position: absolute;
+        height: 50px;
+        width: 80px;
     }
 }
 
@@ -313,7 +339,7 @@ table {
 #container-produto{
     display:flex;
     margin-top:50px;
-    background-color: #e2e2e2;
+    background-color: #f7f7f7;
 
     #produto-lado-esquerdo{
         width: 50%;
@@ -330,12 +356,16 @@ table {
             margin-bottom:20px;
         }
         #tamanhos{
-            button{
-                padding:8px 15px;
-                border:none;
+            .btn-tam{
+                padding:12px 20px;
+                border:1px solid gray;
                 border-radius: 5px;
                 font-weight: bolder;
                 cursor: pointer;
+            
+            }
+            .selecionado{
+                background-color: white;
             }
         }
         #comprar{
@@ -347,10 +377,14 @@ table {
                 color:white;
                 font-weight: bolder;
                 letter-spacing: 1px;
-                padding: 10px 22px;                
+                padding: 15px 28px;                
                 border-radius: 5px;
                 cursor: pointer;
             }
+            button:hover{
+                background-color: #3db843;
+            }
+            
         }
         #cep{
             

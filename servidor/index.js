@@ -134,8 +134,14 @@ router.post('/registrar', function(req, res){
 app.post('/paginaProduto', function(req, res){
     const produtos = req.body
     res.render('paginaProduto.ejs',{
-        produtos: produtos
+        produtos: produtos,
+        user:req.session.user
     })
+})
+
+app.post('/adicionar-carrinho', function(req, res){
+    const produto = req.body
+    
 })
 
 
