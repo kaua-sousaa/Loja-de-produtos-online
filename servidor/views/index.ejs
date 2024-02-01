@@ -37,52 +37,31 @@
                         <button type="button" onclick="location.href='/login'">Login</button>
                         <button type="button" onclick="location.href='/registrar'">Cadastrar</button>
                     </div>
-                    <% } %>
+                <% } %>
         </div>
     </div>
-    <div id="box">
-        <a href="/paginaProduto">
+    <div id="box"> 
+        <% if (produtos && produtos.length >0){%>
+        <% for(let i=0; i<produtos.length; i++) {%>
+            
+        <a href="/paginaProduto" onclick="document.getElementById('formulario<%=i%>').submit(); return false">
+            <form id="formulario<%=i%>" action="/paginaProduto" method="post">
             <div class="produto">
-                <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
+                <img class="imagem-produto" src=<%=produtos[i].img %> alt="Produto">
                 <div class="info">
-                    <p class="nome-produto">pratas gb</p>
-                    <p class="preco">R$ 79,99</p>
+                    <p class="nome-produto"><%= produtos[i].titulo %></p>
+                    <p class="preco"> R$ <%= produtos[i].precos %></p>
                 </div>
                 <button class="comprar-btn">COMPRAR</button>
             </div>
-
+            <input type="hidden" name="img" value="<%=produtos[i].img%>">
+            <input type="hidden" name="titulo" value="<%=produtos[i].titulo%>">
+            <input type="hidden" name="precos" value="<%=produtos[i].precos%>">
+        </form>
         </a>
-        <a href="/paginaProduto">
-            <div class="produto">
-                <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
-                <div class="info">
-                    <p class="nome-produto">pratas lucas</p>
-                    <p class="preco">R$ 89,99</p>
-                </div>
-                <button class="comprar-btn">COMPRAR</button>
-            </div>
-        </a>
-        <a href="/paginaProduto">
-            <div class="produto">
-                <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
-                <div class="info">
-                    <p class="nome-produto">pratas melo</p>
-                    <p class="preco">R$ 79,99</p>
-                </div>
-                <button class="comprar-btn">COMPRAR</button>
-            </div>
-        </a>
-        <a href="/paginaProduto">
-            <div class="produto">
-                <img class="imagem-produto" src="https://picsum.photos/200/200" alt="Produto">
-                <div class="info">
-                    <p class="nome-produto">pratas eminem</p>
-                    <p class="preco">R$ 89,99</p>
-                </div>
-                <button class="comprar-btn">COMPRAR</button>
-            </div>
-        </a>
+        <%} } %>
     </div>
+
     <h1 style="text-align: center; margin: 20px 0px;"> CARRINHO</h1>
     <div id="carrinho">
         <table>

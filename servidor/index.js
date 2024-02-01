@@ -8,7 +8,6 @@ const bcrypt = require('bcryptjs')
 const mysql =  require('mysql')
 const { error } = require('console')
 
-
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -34,6 +33,8 @@ app.use((req, res, next)=>{
     next()
 })
 
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '..', 'cliente')));
@@ -41,14 +42,30 @@ app.use('/', router)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
-const caminhoCliente = '../cliente'
 
-router.get('/', function(req, res){
-    res.render('index',{
-        user: req.session.user
-    })
+app.get('/', async(req, res)=>{
+   const produtos = await buscarProduto()
+   
+    res.render('index.ejs', {
+         produtos: produtos,
+         user: req.session.user
+        })
 })
 
+async function buscarProduto(){
+    return new Promise((resolve, reject)=>{
+        db.query("SELECT * FROM tabela_produtos", async(err, resultado)=>{
+            if (err){
+                console.log(err)
+                reject(err)
+            }else{
+                resolve(resultado)
+            }
+            
+        })
+    })
+    
+}
 
 router.get('/login', function(req, res){
     res.render('login.ejs')
@@ -69,10 +86,8 @@ router.post('/login', function(req,res){
             if (senhaCorreta){
                 db.query('SELECT nome FROM tabela_login WHERE email = ?', [email], async(err, resultado)=>{
                     console.log("Deu bom")
-                    req.session.usar = resultado[0].nome
-                    return res.render('index', {
-                        user: resultado[0].nome
-                    })
+                    req.session.user = resultado[0].nome
+                    return res.redirect("/")
                 })
                          
             }else{
@@ -116,8 +131,11 @@ router.post('/registrar', function(req, res){
 
 })
 
-router.get('/paginaProduto', function(req, res){
-    res.render('paginaProduto.ejs')
+app.post('/paginaProduto', function(req, res){
+    const produtos = req.body
+    res.render('paginaProduto.ejs',{
+        produtos: produtos
+    })
 })
 
 

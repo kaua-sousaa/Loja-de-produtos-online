@@ -16,12 +16,12 @@
     <div id="container-produto">
         <div id="produto-lado-esquerdo">
             <div>
-                <img src="https://picsum.photos/400/400" alt="">
+                <img src="<%= produtos.img %>" alt="" width="400" height="400">
             </div>
         </div>
         <div id="produto-lado-direito">
             <div>
-                <h2> prata veneziana 925</h2>
+                <h2> <%= produtos.titulo%></h2>
             </div>
             <div id="tamanhos">
                 <p>Tamanho desejado</p>
@@ -30,8 +30,8 @@
                 <button> 70cm </button>
             </div>
             <div id="comprar">
-                <h3>R$ 600,00 no Pix</h3>
-                <p> Ou 3x de R$ 200,00</p>
+                <h3>R$ <%=produtos.precos%> no Pix</h3>
+                <p> Ou 3x de R$ <%= (produtos.precos/3).toFixed(2) %></p>
                 <button type="submit">COMPRAR</button>
             </div>
             <div id="cep">
