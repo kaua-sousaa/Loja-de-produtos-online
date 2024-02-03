@@ -16,28 +16,24 @@ function ready() {
         addRemoverItens[i].addEventListener("click", CliqueBotaoMM);
     }
 
-   /* let addCarrinho = document.getElementsByClassName("comprar-btn")
-    for (var i = 0; i < addCarrinho.length; i++) {
-        addCarrinho[i].addEventListener("click", adicionarCarrinho)
-    }*/
     let addCarrinho = document.getElementsByClassName("comprar-pag-produto")
     for (var i = 0; i < addCarrinho.length; i++) {
-        addCarrinho[i].addEventListener("click", adicionarCarrinho)
+        addCarrinho[i].addEventListener("click", calcularTotal())
     }
 
     let btnComprar = document.getElementById("finalizar-compra")
     btnComprar.addEventListener("click", realizarCompra)
-    
-    
 
-}   
 
-function realizarCompra(){
-    if (precoTotal === "0,00"){
+
+}
+
+function realizarCompra() {
+    if (precoTotal === "0,00") {
         alert("Seu carrinho está vazio!")
-    }else{
+    } else {
         alert(
-        `
+            `
         Obrigado pela sua compra!
         Valor: R$ ${precoTotal}
         Volte sempre!
@@ -51,152 +47,73 @@ function realizarCompra(){
 function CliqueBotaoMM(event) {
     let acao = event.target;
     let acaoPai = acao.parentElement.parentElement;
-    let quantidade = parseInt(acaoPai.querySelector(".quantidade-itens").innerHTML);
+    let titulojs = acaoPai.parentElement.parentElement
+    let titulo = titulojs.querySelector('.nome').innerHTML
+    titulo = titulo.trim()
+    console.log(titulo)
 
+    let quantidade = parseInt(acaoPai.querySelector(".quantidade-itens").innerHTML);
+    let action
     if (acao.classList.contains("bx-minus") && quantidade > 0) {
-        quantidade--;
+        quantidade--
+        action = 'minus'
     } else if (acao.classList.contains("bx-plus")) {
-        quantidade++;
+        action = 'plus'
+        quantidade++
     }
 
     acaoPai.querySelector(".quantidade-itens").innerHTML = quantidade
 
+
     if (quantidade === 0) {
         acaoPai.parentElement.parentElement.remove()
     }
+
+    fetch('/atualizar-carrinho', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ action, titulo })
+    })
 
     calcularTotal();
 }
 
 
 function removerItem(event) {
-    event.target.parentElement.parentElement.remove();
-    calcularTotal();
+    acao = event.target.parentElement.parentElement
+    let tituloRemover = acao.querySelector('.nome').innerHTML
+    tituloRemover = tituloRemover.trim()
+
+    fetch('/atualizar-carrinho', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ tituloRemover })
+    })
 }
 
-function adicionarCarrinho(event) {
-    let produto = event.target.parentElement.parentElement.parentElement
-    console.log(produto)
-    let imgProduto = produto.querySelector(".img-pag-produto").src
-    let nomeProduto = produto.querySelector(".titulo-pag-produto").innerHTML
-    let precoProduto = produto.querySelector(".precos-pag-produto").innerHTML
-
-    console.log(imgProduto, nomeProduto, precoProduto)
-
-    let nomeProdutosCarrinho = document.getElementsByClassName("nome")
-    for (var i=0; i<nomeProdutosCarrinho.length;i++){
-        if (nomeProdutosCarrinho[i].innerHTML == nomeProduto){
-        let quantidade = parseInt(nomeProdutosCarrinho[i].parentElement.parentElement.parentElement.querySelector(".quantidade-itens").innerHTML)
-        nomeProdutosCarrinho[i].parentElement.parentElement.parentElement.querySelector(".quantidade-itens").innerHTML = quantidade +1
-        calcularTotal()
-            return
-        }
-    }
-
-    let novoElement = document.createElement("tr")
-    novoElement.classList.add("produto-carrinho")
-    novoElement.innerHTML = 
-    `
-                    <td class="produto-identificao">
-                        <img src="${imgProduto}" alt="${nomeProduto}">
-                        <div class="info-carrinho">
-                            <div class="nome">${nomeProduto}</div>
-                         <!--   <div class="tipo">M</div>-->
-                        </div>
-                    </td>
-                    <td class="preco-produto">${precoProduto}</td>
-                    <td>
-                        <div class="qty">
-                            <button class="botaoMM" type="button"><i class='bx bx-minus'></i></button>
-                            <span class="quantidade-itens">1</span>
-                            <button class="botaoMM" type="button"><i class='bx bx-plus'></i></button>
-                        </div>
-                    </td>
-                    <td class="remover">
-                        <button type="button" class="btn-remover">REMOVER</button>
-                    </td>
-    `
-    
-    let tabela = document.querySelector("#carrinho tbody")
-    console.log(document.querySelector('#carrinho tbody'))
-    console.log(novoElement)
-    tabela.append(novoElement)
-    calcularTotal()
-    novoElement.querySelector(".btn-remover").addEventListener("click", removerItem)
-    novoElement.querySelector(".qty").addEventListener("click", CliqueBotaoMM)
-
-    
-}
-/*
-function adicionarCarrinho(event) {
-    let produto = event.target.parentElement
-    let imgProduto = produto.querySelector(".imagem-produto").src
-    let nomeProduto = produto.querySelector(".nome-produto").innerHTML
-    let precoProduto = produto.querySelector(".preco").innerHTML
-
-    let nomeProdutosCarrinho = document.getElementsByClassName("nome")
-    for (var i=0; i<nomeProdutosCarrinho.length;i++){
-        if (nomeProdutosCarrinho[i].innerHTML == nomeProduto){
-        let quantidade = parseInt(nomeProdutosCarrinho[i].parentElement.parentElement.parentElement.querySelector(".quantidade-itens").innerHTML)
-        nomeProdutosCarrinho[i].parentElement.parentElement.parentElement.querySelector(".quantidade-itens").innerHTML = quantidade +1
-        calcularTotal()
-            return
-        }
-    }
-
-    let novoElement = document.createElement("tr")
-    novoElement.classList.add("produto-carrinho")
-    novoElement.innerHTML = 
-    `
-                    <td class="produto-identificao">
-                        <img src="${imgProduto}" alt="${nomeProduto}">
-                        <div class="info-carrinho">
-                            <div class="nome">${nomeProduto}</div>
-                         <!--   <div class="tipo">M</div>-->
-                        </div>
-                    </td>
-                    <td class="preco-produto">${precoProduto}</td>
-                    <td>
-                        <div class="qty">
-                            <button class="botaoMM" type="button"><i class='bx bx-minus'></i></button>
-                            <span class="quantidade-itens">1</span>
-                            <button class="botaoMM" type="button"><i class='bx bx-plus'></i></button>
-                        </div>
-                    </td>
-                    <td class="remover">
-                        <button type="button" class="btn-remover">REMOVER</button>
-                    </td>
-    `
-    
-    let tabela = document.querySelector("#carrinho tbody")
-    tabela.append(novoElement)
-    calcularTotal()
-    novoElement.querySelector(".btn-remover").addEventListener("click", removerItem)
-    novoElement.querySelector(".qty").addEventListener("click", CliqueBotaoMM)
-
-}*/
 
 function calcularTotal() {
-    let total = document.getElementsByClassName("produto-carrinho");
-    precoTotal = 0
-    for (var x = 0; x < total.length; x++) {
-        preco = total[x].querySelector(".preco-produto").innerHTML.replace("R$", "").replace(",", ".")
-        quantidade = total[x].querySelector(".quantidade-itens").innerHTML
-        precoTotal = precoTotal + (preco * quantidade)
-    }
-
-    precoTotal = precoTotal.toFixed(2)
-    document.getElementById("total").innerHTML = "R$ " + precoTotal
+    console.log('usado calcular')
+    fetch('/total')
+    .then (response => response.json())
+    .then (data => {
+        document.getElementById("total").innerHTML = "R$ " + data.total.toFixed(2)
+    })
+    
 }
 
 
-function tamanhosBot(op){
+function tamanhosBot(op) {
     let conteudo = document.getElementsByClassName('btn-tam')
-    
-    for (let i=0; i< conteudo.length;i++){    
-        
-            conteudo[i].classList.remove('selecionado')
-              
+
+    for (let i = 0; i < conteudo.length; i++) {
+
+        conteudo[i].classList.remove('selecionado')
+
     }
     document.getElementById(op).classList.add('selecionado')
 }
