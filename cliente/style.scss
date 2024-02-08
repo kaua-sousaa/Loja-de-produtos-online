@@ -90,7 +90,7 @@ header {
         content: "";
         position: absolute;
         width: 160px;
-        height: 80px;
+        height: 120px;
     }
 
     .cart{
@@ -404,4 +404,38 @@ table {
           
         }
     }
+}
+
+
+
+//
+//                MINHA CONTA    MINHA CONTA    MINHA CONTA    MINHA CONTA//
+//
+
+#minhaConta-container{
+    display:flex;
+    margin-top:50px;
+}
+
+#minha-conta-ops{
+    width: 30%;
+    margin-left:40px;
+    li{
+       display:flex;
+       margin-top:10px;
+       
+    }
+    li a{
+        background-color: #eee;
+        border:1px solid black;
+        text-decoration: none;
+        width: 150px;
+        height: 30px;
+        color:black;
+    }
+
+}
+
+#minha-conta-conteudo{
+    width: 70%;
 }

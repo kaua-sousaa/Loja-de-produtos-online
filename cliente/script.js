@@ -24,11 +24,16 @@ function ready() {
     let btnComprar = document.getElementById("finalizar-compra")
     btnComprar.addEventListener("click", realizarCompra)
 
-
+    
 
 }
 
+
 function realizarCompra() {
+    precoTotal = document.getElementById('total').innerHTML
+    tituloRemover = document.querySelector('.titulo-pag-produto').innerHTML
+    tituloRemover = titulo.trim()
+
     if (precoTotal === "0,00") {
         alert("Seu carrinho está vazio!")
     } else {
@@ -39,9 +44,16 @@ function realizarCompra() {
         Volte sempre!
         `)
     }
+    
+    document.querySelector(".dropdown-cart").innerHTML = ""
 
-    document.querySelector("#carrinho tbody").innerHTML = ""
-    calcularTotal()
+    fetch('/atualizar-carrinho', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ tituloRemover })
+    })
 }
 
 function CliqueBotaoMM(event) {
@@ -50,7 +62,6 @@ function CliqueBotaoMM(event) {
     let titulojs = acaoPai.parentElement.parentElement
     let titulo = titulojs.querySelector('.nome').innerHTML
     titulo = titulo.trim()
-    console.log(titulo)
 
     let quantidade = parseInt(acaoPai.querySelector(".quantidade-itens").innerHTML);
     let action
@@ -64,9 +75,9 @@ function CliqueBotaoMM(event) {
 
     acaoPai.querySelector(".quantidade-itens").innerHTML = quantidade
 
-
     if (quantidade === 0) {
         acaoPai.parentElement.parentElement.remove()
+
     }
 
     fetch('/atualizar-carrinho', {
@@ -93,6 +104,9 @@ function removerItem(event) {
         },
         body: JSON.stringify({ tituloRemover })
     })
+
+    acao.closest('.dropdown-cart').remove()
+    calcularTotal();
 }
 
 

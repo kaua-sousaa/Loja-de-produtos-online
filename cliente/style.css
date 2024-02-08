@@ -80,7 +80,7 @@ header {
   content: "";
   position: absolute;
   width: 160px;
-  height: 80px;
+  height: 120px;
 }
 #navegacao .cart {
   display: flex;
@@ -347,4 +347,30 @@ table tbody tr {
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+#minhaConta-container {
+  display: flex;
+  margin-top: 50px;
+}
+
+#minha-conta-ops {
+  width: 30%;
+  margin-left: 40px;
+}
+#minha-conta-ops li {
+  display: flex;
+  margin-top: 10px;
+}
+#minha-conta-ops li a {
+  background-color: #eee;
+  border: 1px solid black;
+  text-decoration: none;
+  width: 150px;
+  height: 30px;
+  color: black;
+}
+
+#minha-conta-conteudo {
+  width: 70%;
 }/*# sourceMappingURL=style.css.map */
