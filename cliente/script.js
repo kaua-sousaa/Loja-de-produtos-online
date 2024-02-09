@@ -32,8 +32,8 @@ function ready() {
 function realizarCompra() {
     precoTotal = document.getElementById('total').innerHTML
     tituloRemover = document.querySelector('.titulo-pag-produto').innerHTML
-    tituloRemover = titulo.trim()
-
+    tituloRemover = tituloRemover.trim()
+    
     if (precoTotal === "0,00") {
         alert("Seu carrinho está vazio!")
     } else {

@@ -373,4 +373,18 @@ table tbody tr {
 
 #minha-conta-conteudo {
   width: 70%;
+}
+
+#meus-dados {
+  font-weight: bolder;
+}
+#meus-dados input {
+  width: 300px;
+  height: 30px;
+  border: 1px solid gray;
+  box-shadow: 1px 1px 1px 1px;
+  margin-bottom: 15px;
+}
+#meus-dados p {
+  margin-top: 15px;
 }/*# sourceMappingURL=style.css.map */

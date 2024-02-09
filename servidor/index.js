@@ -218,16 +218,18 @@ app.get('/total', function(req, res){
     res.json({ total: total})
 })
 
-app.get('/meusPedidos', function(req, res){
 
-    res.render('minhaConta.ejs',{
+app.get('/minhaConta/pedidos', function(req, res){
+
+    res.render('minhaConta/pedidos.ejs',{
         user: req.session.user,
         cart:req.session.cart
     })
 })
-app.get('/minhaConta/pedidos', function(req, res){
 
-    res.render('minhaConta/pedidos.ejs',{
+app.get('/minhaConta/meusDados', function(req, res){
+
+    res.render('minhaConta/meusDados.ejs',{
         user: req.session.user,
         cart:req.session.cart
     })

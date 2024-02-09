@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,43 @@
 </head>
 
 <body>
-    <%- include('../minhaConta'); %>
-    
+    <%- include('../base.ejs'); %>
+        <div id="minhaConta-container">
+            <div id="minha-conta-ops">
+                <ul>
+                    <li>
+                        <a href="/minhaConta/pedidos">Meus pedidos</a>
+                    </li>
+                    <li>
+                        <a href="/minhaConta/meusDados">Minha conta</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="minha-conta-conteudo">
+                <h2>Meus pedidos</h2>
+                <hr>
+                <div id="tab-pedidos">
+                    <table>
+                        <tr>
+                            <th>Pedido</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th> - </th>
+                        </tr>
+                        <tr>
+                            <td>#23232</td>
+                            <td>25/03/2023</td>
+                            <td>Entregue</td>
+                            <td>R$ 540,99</td>
+                            <td>
+                                <button>Visualizar</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
 </body>
 
 </html>
