@@ -27,7 +27,7 @@
         <div class="navegacao-direita">
             <div class="login">
                 <% if (user) { %>
-                    <span>Olá, <%= user %></span>
+                    <span>Olá, <%= user.nome %></span>
                     <div class="dropdown">
                         <button type="button" onclick="location.href='/minhaConta/pedidos'"> Meus pedidas</button>
                         <button type="button" onclick="location.href='/sair'"> Sair</button>
@@ -97,7 +97,7 @@
                                 </tfoot>
                             </table>
                         </div>
-                        <div id="finalizar-compra">
+                        <div class="finalizar-compra">
                             <button type="button"> FINALIZAR COMPRAR</button>
                         </div>
                     </div>

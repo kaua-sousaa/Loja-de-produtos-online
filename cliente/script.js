@@ -3,9 +3,10 @@ if (document.readyState == "loading") {
 } else {
     ready()
 }
-precoTotal = "0,00"
+
 
 function ready() {
+    precoTotal = "0,00"
     let RemoverProduto = document.getElementsByClassName("btn-remover");
     for (var i = 0; i < RemoverProduto.length; i++) {
         RemoverProduto[i].addEventListener("click", removerItem);
@@ -21,40 +22,57 @@ function ready() {
         addCarrinho[i].addEventListener("click", calcularTotal())
     }
 
-    let btnComprar = document.getElementById("finalizar-compra")
-    btnComprar.addEventListener("click", realizarCompra)
-
+    let btnComprar = document.getElementsByClassName("finalizar-compra")
+    for (var i = 0; i< btnComprar.length;i++){
+        btnComprar[i].addEventListener("click", realizarCompra)
+    }
     
 
 }
 
-
-function realizarCompra() {
+async function realizarCompra() {
     precoTotal = document.getElementById('total').innerHTML
     tituloRemover = document.querySelector('.titulo-pag-produto').innerHTML
-    tituloRemover = tituloRemover.trim()
-    
-    if (precoTotal === "0,00") {
-        alert("Seu carrinho está vazio!")
-    } else {
-        alert(
-            `
+
+    if (precoTotal && tituloRemover) {
+        tituloRemover = tituloRemover.trim()
+
+        if (precoTotal === "0,00") {
+            alert("Seu carrinho está vazio!")
+        } else {
+            alert(
+                `
         Obrigado pela sua compra!
         Valor: R$ ${precoTotal}
         Volte sempre!
         `)
-    }
-    
-    document.querySelector(".dropdown-cart").innerHTML = ""
+        }
 
-    fetch('/atualizar-carrinho', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ tituloRemover })
-    })
+        document.querySelector(".dropdown-cart").innerHTML = ""
+
+        fetch('/atualizar-carrinho', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ tituloRemover, precoTotal })
+        })
+
+        precoTotal = precoTotal.replace("R$", "")
+        fetch('/finalizar-compra', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ precoTotal })
+        })
+        console.log('passou do finalizar')
+    } else {
+        console.log('sem elementos')
+    }
+
 }
+
 
 function CliqueBotaoMM(event) {
     let acao = event.target;
@@ -113,11 +131,11 @@ function removerItem(event) {
 function calcularTotal() {
     console.log('usado calcular')
     fetch('/total')
-    .then (response => response.json())
-    .then (data => {
-        document.getElementById("total").innerHTML = "R$ " + data.total.toFixed(2)
-    })
-    
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("total").innerHTML = "R$ " + data.total.toFixed(2)
+        })
+
 }
 
 

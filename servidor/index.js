@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs')
 const mysql = require('mysql')
 const { error } = require('console')
 app.use(express.json())
+
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -47,6 +48,7 @@ app.get('/', async (req, res) => {
     const produtos = await buscarProduto()
     req.session.cart = req.session.cart || [];
     req.session.produtos = produtos
+    console.log(req.session.user)
     res.render('index.ejs', {
         produtos: produtos,
         user: req.session.user,
@@ -69,6 +71,32 @@ async function buscarProduto() {
 
 }
 
+app.post('/finalizar-compra', function(req, res){
+    const {precoTotal} = req.body
+
+    //adicionarCompra(precoTotal, req)
+    console.log('passou')
+
+     res.render('index.ejs',{
+        user:req.session.user,
+        cart:req.session.cart,
+        produtos: req.session.produtos
+    })
+})
+
+async function adicionarCompra(total, req){
+    return new Promise((resolve, reject) => {
+        db.query("INSERT INTO tab_compras (status, total, id_usuario) VALUES (?, ?, ?)", ['Em processo', total, req.session.user.id_usuario], (err, resultado) =>{
+            if (err){
+                console.log(err)
+                reject(err)
+            }else{
+                resolve(resultado)
+            }
+        })
+    })
+}
+
 router.get('/login', function (req, res) {
     res.render('login.ejs')
 })
@@ -86,9 +114,13 @@ router.post('/login', function (req, res) {
         } else {
             const senhaCorreta = await bcrypt.compare(senha, resultado[0].senha)
             if (senhaCorreta) {
-                db.query('SELECT nome FROM tabela_login WHERE email = ?', [email], async (err, resultado) => {
+                db.query('SELECT id, nome FROM tabela_login WHERE email = ?', [email], async (err, resultado) => {
                     console.log("Deu bom")
-                    req.session.user = resultado[0].nome
+                    req.session.user = {
+                        nome: resultado[0].nome,
+                        id_usuario: resultado[0].id
+
+                    }    
                     return res.redirect("/")
                 })
 
@@ -208,6 +240,7 @@ app.post('/atualizar-carrinho', function(req, res){
 
     }) 
 })
+
 
 app.get('/total', function(req, res){
     let total = 0

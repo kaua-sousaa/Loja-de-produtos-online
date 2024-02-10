@@ -272,12 +272,12 @@ table tbody tr {
   cursor: pointer;
 }
 
-#finalizar-compra {
+.finalizar-compra {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
-#finalizar-compra button {
+.finalizar-compra button {
   background-color: #4caf50;
   border: none;
   color: white;
@@ -288,7 +288,7 @@ table tbody tr {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-#finalizar-compra button:hover {
+.finalizar-compra button:hover {
   background-color: #45a049;
 }
 
